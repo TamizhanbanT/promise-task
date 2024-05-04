@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+<body>
+    <script>
+        function fetchData(url) {
+        return new Promise((resolve, reject) => {
+          fetch(url)
+        
+            .then(response => {
+               
+              if (!response.ok) {
+                throw new Error(`Network response was not ok: ${response.status}`);
+              }
+              return response.json();
+              
+            })
+            .then(data => resolve(data))
+            .catch(error => reject(error));
+        });
+      }
+   
+        let key="xyWX6p88KudJogL3JnnDA2ap"
+        let anime="https://danbooru.donmai.us/posts.json?api_key=xyWX6p88KudJogL3JnnDA2ap&login=Tamizh"
+
+        function breweries(bre){
+           
+           let brew1=bre.map((t)=>{
+               return (
+               document.write(`
+         <div>
+
+           <img src=${t.media_asset.variants[0].url}>
+           <h1>Rating:: ${t.rating}</h1>  </div>
+           `))
+         }
+           )    
+           return brew1
+
+         }
+        
+
+        fetchData(anime).then((x)=>{breweries(x)}).catch((x)=>console.log(x))
+        
+    </script>
+    
+</body>
+</html>
